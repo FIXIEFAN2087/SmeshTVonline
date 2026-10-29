@@ -1,0 +1,211 @@
+<script>
+    // --- НАСТРОЙКИ ВИРТУАЛЬНОГО ЭФИРА ---
+    // Список видео с их длительностью в секундах
+    const SCHEDULE = [
+        { id: 'ZZgJ0QhOe44', duration: 3670 }, // Смешарики 2D с самого начала. Часть 1
+        { id: 'c8Zy62mdYfA', duration: 3673 }, // Смешарики 2D с самого начала. Часть 2
+        { id: 'thaqccB0Duk', duration: 3660 }, // Смешарики 2D с самого начала. Часть 3
+        { id: 'bnpKzdPuPqQ', duration: 3649 }, // Смешарики 2D с самого начала. Часть 4
+        { id: 'hTA3CewckcI', duration: 3652 }, // Смешарики 2D с самого начала. Часть 5
+        { id: 'Sh-3gT0KPKo', duration: 3653 }, // Смешарики 2D с самого начала. Часть 6
+        { id: 'baSCMw-2qt8', duration: 3651 }, // Смешарики 2D с самого начала. Часть 7
+        { id: 'rXtaU_yitlQ', duration: 3657 }, // Смешарики 2D с самого начала. Часть 8
+        { id: 'LilMEk7sV7I', duration: 3641 }, // Смешарики 2D с самого начала. Часть 9
+        { id: 'r7FdLk6D33U', duration: 3666 }, // Смешарики 2D с самого начала. Часть 10
+        { id: 'pOWbR8Lt2Fk', duration: 3659 }, // Смешарики 2D с самого начала. Часть 11
+        { id: 'b0WgAMA82sE', duration: 3661 }, // Смешарики 2D с самого начала. Часть 12
+        { id: 'Nt0xnw022i8', duration: 3664 }, // Смешарики 2D с самого начала. Часть 13
+        { id: 'i3J6i3xM32Y', duration: 3663 }, // Смешарики 2D с самого начала. Часть 14
+        { id: 'N0mnyfrz_Kc', duration: 4043 }, // Смешарики 2D с самого начала. Часть 15
+        { id: 'Z96u0zQ1NcY', duration: 3654 }, // Смешарики 2D с самого начала. Часть 16
+        { id: 'QED0t7sm8Fs', duration: 3675 }, // Смешарики 2D с самого начала. Часть 17
+        { id: 'O6jZrq60wVw', duration: 3655 }, // Смешарики 2D с самого начала. Часть 18
+        { id: 'VFm3ngb3KDw', duration: 3662 }, // Смешарики 2D с самого начала. Часть 19
+        { id: 'QIauHSawzog', duration: 3670 }, // Смешарики 2D с самого начала. Часть 20
+        { id: 'kBKonWmRAjc', duration: 4749 }, // Смешарики 2D с самого начала. Часть 21
+        { id: 'rEbSRebPl3c', duration: 2216 }, // Смешарики 2D | Новый сезон. Часть 1 - Сборник. ПРЕМЬЕРА 2020. Новый год с любимыми героями! 🎄🎅
+        { id: 'SjVLjlzTD1I', duration: 2205 }, // Смешарики 2D | Новый сезон. Часть 2 - Сборник. ПРЕМЬЕРА 2021.
+        { id: '4jPFiWxEcsU', duration: 2207 }, // Смешарики 2D | Новый сезон. Часть 3 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'HxIN8bdK6MI', duration: 2201 }, // Смешарики 2D | Новый сезон. Часть 4 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'aYwyJoatNjI', duration: 2241 }, // Смешарики 2D | Новый сезон. Часть 5 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'Qf9MTm7oMuo', duration: 2374 }, // Смешарики 2D | Новый сезон. Часть 6 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'PrbRDdP_3xw', duration: 2385 }, // Смешарики 2D | Новый сезон. Часть 7 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'wtuZsM8AaB0', duration: 2399 }, // Смешарики 2D | Новый сезон. Часть 8 - Сборник. ПРЕМЬЕРА 2021.
+        { id: 'XvIpzwUh218', duration: 2003 }, // Смешарики 2D | Новый сезон. Часть 9 - Сборник. ПРЕМЬЕРА 2022.
+        { id: 'GmMmHxCRXLo', duration: 2384 }, // Смешарики 2D | Новый сезон. Часть 10 - Сборник. ПРЕМЬЕРА 2022.
+        { id: 'pxeoZzd_Hqw', duration: 2394 }, // Смешарики 2D | Новый сезон. Часть 11 - Сборник. ПРЕМЬЕРА 2022.
+        { id: '8bfaNcERQBY', duration: 2394 }, // Смешарики 2D | Новый сезон. Часть 12 - Сборник. ПРЕМЬЕРА 2022.
+        { id: '9fVKFXAU2TM', duration: 2396 }, // Смешарики 2D | Новый сезон. Часть 13 - Сборник. ПРЕМЬЕРА 2022.
+        { id: 'b7n0erMVXz0', duration: 2434 }, // Смешарики 2D | Новый сезон. Часть 14 - Сборник. ПРЕМЬЕРА 2022.
+        { id: 'RCSja3_8gno', duration: 2396 }, // Смешарики 2D | Новый сезон. Часть 15 - Сборник. ПРЕМЬЕРА 2023.
+        { id: 'TAT4hpacgnc', duration: 2397 }, // Смешарики 2D | Новый сезон. Часть 16 - Сборник. ПРЕМЬЕРА 2023.
+        { id: 'Gxp4YOh3dSo', duration: 1596 }, // Смешарики 2D | Новый сезон. Часть 17 - Сборник. ПРЕМЬЕРА 2023.
+        { id: 'Nlr5f_IyHs4', duration: 2611 }, // Смешарики 2D | Новый сезон. Часть 18 - Сборник. ПРЕМЬЕРА 2023.
+        { id: 'P-q48fSvZdM', duration: 2578 }, // Смешарики 2D | Новый сезон. Часть 19 - Сборник. ПРЕМЬЕРА 2023.
+        { id: 'gs-MZg77o6w', duration: 6222 }, // Смешарики снимают кино. ВСЕ серии | Смешарики 2D | Сборник 2024
+        { id: 'nOK0h7-5Hu0', duration: 3126 }, // ✌ Фиксики - Все серии подряд I Часть 1
+        { id: 'dpiauz0DRio', duration: 4269 }, // Все серии подряд. Часть 2 I Фиксики
+        { id: 'aKOqDGHN6zw', duration: 3175 }, // ✌ Фиксики - Все серии подряд I Часть 3
+        { id: 'p0CRUaxSzos', duration: 3181 }, // ✌ Фиксики - Все серии подряд I Часть 4
+        { id: '-NfxQCAEuQ0', duration: 3175 }, // ✌ Фиксики - Все серии подряд I Часть 5
+        { id: 'ymSwedLlQag', duration: 3651 }, // ✌ Фиксики - Все серии подряд I Часть 6
+        { id: 'u5jjVvEvED8', duration: 3645 }, // ✌ Фиксики - Все серии подряд I Часть 7
+        { id: 'mludCeHwp6M', duration: 3634 }, // ✌ Фиксики - Все серии подряд I Часть 8
+        { id: 'JidMrZfwS6E', duration: 3650 }, // ✌ Фиксики - Все серии подряд I Часть 9
+        { id: 'LEFAnvb0A2Y', duration: 3613 }, // ✌ Фиксики - Все серии подряд I Часть 10
+        { id: 'iKToH5nt82Y', duration: 3630 }, // ✌ Фиксики - Все серии подряд I Часть 11
+        { id: '2sZoMT7ASdE', duration: 3664 }, // ✌ Фиксики - Все серии подряд I Часть 12
+        { id: '9666mtwGYd0', duration: 3646 }, // ✌ Фиксики - Все серии подряд I Часть 13
+        { id: 'wXNeGMG2PeQ', duration: 3601 }, // ✌ Фиксики - Все серии подряд I Часть 14
+        { id: '6tlME_HgGcc', duration: 3634 }, // ✌ Фиксики - Все серии подряд I Часть 15
+        { id: 'BTXiIcC8t1s', duration: 3640 }, // ✌ Фиксики - Все серии подряд I Часть 16
+        { id: 'NgS5Y3Z6L5Y', duration: 3780 }, // ✌ Фиксики - Все серии подряд I Часть 17
+        { id: 'kk7gYDVXhwU', duration: 3767 }, // ✌ Фиксики - Все серии подряд I Часть 18
+        { id: '01KgLgevgYo', duration: 3743 }, // ✌ Фиксики - Все серии подряд I Часть 19
+        { id: 'XsQkIu9lsMs', duration: 3724 }, // ✌ Фиксики - Все серии подряд I Часть 20
+        { id: 'Wa_s7wWdvio', duration: 3724 }, // ✌ Фиксики - Все серии подряд I Часть 21
+        { id: 'NtGWRWtlDcY', duration: 3694 }, // ✌ Фиксики - Все серии подряд I Часть 22
+        { id: 'weHtYO8T038', duration: 4281 }, // Все серии подряд. Часть 17 I Фиксики
+        { id: 'Ym4DOQynP-4', duration: 4290 }, // Все серии подряд. Часть 18 I Фиксики
+        { id: 'LiF6VClY8EU', duration: 4278 }, // Все серии подряд. Часть 19 I Фиксики
+        { id: '7pNe4f6xjsM', duration: 4273 }, // Все серии подряд. Часть 20 I Фиксики
+        { id: 'vdmnIIQdn8E', duration: 4012 }, // Все серии подряд. Часть 21 I Фиксики
+        { id: 'iVRbH_-Bdvo', duration: 4186 }, // Барбоскины | Выпуск 1 | Первое место | Мультики для детей
+        { id: '_ZO5VEEWdX4', duration: 4180 }, // Барбоскины | Выпуск 2 | Лучший подарок | Мультики для детей
+        { id: 'ngdtGvLISOk', duration: 4238 }, // Барбоскины | Выпуск 3 | Настоящий парень (мультфильм)
+        { id: 'LBTqMuXNam4', duration: 4213 }, // Барбоскины | Выпуск 4 | Розыгрыш | Мультики для детей
+        { id: 'PWrHBxn-Ero', duration: 4200 }, // Барбоскины | Выпуск 5 | Ученик чародея | Мультики для детей
+        { id: '9CDdPPlsUkk', duration: 4205 }, // Барбоскины | Выпуск 6 | Дворовая история | Мультики для детей
+        { id: 'BGl3stSRuZU', duration: 4264 }, // Барбоскины | Выпуск 7 | Мультики для детей
+        { id: '3PFMy0KUqOc', duration: 4235 }, // The Barboskins | Episode 8 | New episodes. Cartoons for children
+        { id: 'eg_rlPU5nU0', duration: 4136 }, // The Barkers | Volume 9 | Episodes 131-145 | Cartoons for kids
+        { id: 'gtS9ljoTxPk', duration: 2215 }, // Барбоскины - Выпуск 10 (146 -153 серии подряд)
+        { id: 'yslXg3Fig9I', duration: 2223 }, // Барбоскины | Выпуск 11 | Сборник мультиков для детей
+        { id: '_IoxEwUfDiY', duration: 1964 }, // Барбоскины | Выпуск 12 | Сборник мультиков для детей
+        { id: '470QBDC99X0', duration: 2257 }, // Барбоскины | Выпуск 13 | Сборник мультиков для детей
+        { id: 'yc0D8cQc8tU', duration: 2263 }, // Барбоскины | Выпуск 14 | Сборник мультиков для детей
+        { id: 'HYuqWJsikYA', duration: 2241 }, // Барбоскины | Выпуск 15 | Сборник мультиков для детей
+        { id: 'Ce8ypKo6bE4', duration: 2226 }, // Барбоскины | Выпуск 16 | Короткий сборник мультиков для детей
+        { id: 'dhIl9KiMrTI', duration: 2225 }, // Барбоскины | Выпуск 17 | Сборник мультиков для детей
+        { id: '2UpeA74wnoE', duration: 2215 }, // Барбоскины | Выпуск 18 | Сборник мультиков для детей
+        { id: 'icdSZKq9-sM', duration: 3461 }, // Moonzy | Season 1 | Cartoons for kids
+        { id: 'fWF01i9poYs', duration: 2907 }, // Лунтик - 2 сезон
+        { id: 'H0KNMXjibSw', duration: 4287 }, // Лунтик | 3 сезон | Мультики для детей
+        { id: 'H7bQcQIspG4', duration: 3357 }, // Лунтик -  4 сезон
+        { id: 'vZZ2XL1LZK0', duration: 3134 }, // Лунтик -  5 сезон
+        { id: 'uriXIjs5U18', duration: 2507 }, // Маша и Медведь - Все серии подряд (1-6 серии)
+        { id: 'ocsOiR_zlHc', duration: 2041 }, // Маша и Медведь - Все серии подряд (7-11 серии)
+        { id: 'F4iyIpEEp6k', duration: 1657 }, // Маша и Медведь - Все серии подряд (12-16 серии)
+        { id: 'f2ZHGXfc1Yg', duration: 2064 }, // Маша и Медведь - Все серии подряд (17-21 серии)
+        { id: '7guS5DH4l7w', duration: 2074 }, // Маша и Медведь - Все серии подряд (22-26 серии)
+        { id: 'T5gSuIP618g', duration: 2492 }, // Маша и Медведь - Все серии подряд (27-32 серии)
+        { id: '93xuP93UOng', duration: 2082 }, // Маша и Медведь - Все серии подряд (33-37 серии)
+        { id: 'zJT0LvxPbqw', duration: 2071 }, // Маша и Медведь - Все серии подряд (38-42 серии)
+        { id: 'MYbFnk9mEZo', duration: 2133 }, // Маша и Медведь - Все серии подряд (Сборник 43-47 серии)
+        { id: '_2yU3dWzGd8', duration: 2019 }, // Маша и Медведь - Все серии подряд (Сборник 48-52 серии)
+        { id: 'SGvYHxaFrSU', duration: 2114 }, // Маша и Медведь - Все серии подряд (Сборник 53-57 серии) Новые серии 2016!
+        { id: '8chxDXbhKEM', duration: 2102 }, // Маша и Медведь — Все серии подряд (Сборник 58-62 серии)⚡️ Самые новые мультфильмы 2017! 😜
+        { id: 'fFZrDWsgf5Y', duration: 2168 }, // Маша и Медведь — Все серии подряд (Сборник 63-67 серии)⚡️ Самые новые мультфильмы 2018! 😜
+        { id: 'xqz808j0GKw', duration: 2180 }, // Маша и Медведь — Все серии подряд 🎬 (Сборник 68-72 серии)
+        { id: 'Q3Pfmtil-G0', duration: 2204 }  // Маша и Медведь — Все серии подряд 🎬 (Сборник 73-77 серии)
+    ];
+
+    // Высчитываем общую длину сетки вещания
+    const TOTAL_DURATION = SCHEDULE.reduce((acc, item) => acc + item.duration, 0);
+
+    var player;
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+        // Вычисляем, какое видео должно играть СЕЙЧАС и с какой секунды
+        const now = new Date();
+        // Количество секунд с начала текущего дня (по Гринвичу или локальному времени)
+        const secondsSinceMidnight = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+
+        // Позиция эфира в текущем суточном круге
+        const currentPlaylistTime = secondsSinceMidnight % TOTAL_DURATION;
+
+        let accumulatedTime = 0;
+        let targetVideo = SCHEDULE[0];
+        let startSeconds = 0;
+
+        for (let i = 0; i < SCHEDULE.length; i++) {
+            accumulatedTime += SCHEDULE[i].duration;
+            if (currentPlaylistTime < accumulatedTime) {
+                targetVideo = SCHEDULE[i];
+                startSeconds = currentPlaylistTime - (accumulatedTime - SCHEDULE[i].duration);
+                break;
+            }
+        }
+
+        player = new YT.Player('player', {
+            videoId: targetVideo.id,
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+                'disablekb': 1,
+                'fs': 0,
+                'modestbranding': 1,
+                'rel': 0,
+                'start': Math.floor(startSeconds) // Запуск с точной синхронизированной секунды
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function startTV() {
+        document.getElementById('unmute-overlay').style.display = 'none';
+        if (player) {
+            player.playVideo();
+            player.unMute();
+        }
+    }
+
+    function onPlayerReady(event) {
+        updateTVGuide();
+    }
+
+    function onPlayerStateChange(event) {
+        // Когда текущее видео заканчивается (состояние 0), можно переключать на следующее по порядку
+        if (event.data === YT.PlayerState.ENDED) {
+            playNextInSync();
+        }
+    }
+
+    function playNextInSync() {
+        // Пересчитываем точное видео по времени на случай рассинхрона
+        const now = new Date();
+        const secondsSinceMidnight = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+        const currentPlaylistTime = secondsSinceMidnight % TOTAL_DURATION;
+
+        let accumulatedTime = 0;
+        for (let i = 0; i < SCHEDULE.length; i++) {
+            accumulatedTime += SCHEDULE[i].duration;
+            if (currentPlaylistTime < accumulatedTime) {
+                let startSeconds = currentPlaylistTime - (accumulatedTime - SCHEDULE[i].duration);
+                player.loadVideoById({
+                    'videoId': SCHEDULE[i].id,
+                    'startSeconds': Math.floor(startSeconds)
+                });
+                break;
+            }
+        }
+        updateTVGuide();
+    }
+
+    function updateTVGuide() {
+        if (!player || typeof player.getVideoData !== 'function') return;
+        try {
+            const data = player.getVideoData();
+            if (data && data.title) {
+                document.getElementById('current-title').innerText = data.title;
+            }
+        } catch (e) {}
+    }
+</script>
